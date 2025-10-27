@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Октябрь - Именинники 🎉</title>
+    <style>
+        /* Копирование основных переменных */
+        :root {
+            --color-primary: #4886FF; /* Голубой */
+            --color-secondary: #FFD231; /* Желтый */
+            --color-accent: #FF881A; /* Оранжевый */
+            --color-background: #f5f5dc; /* Светло-бежевый */
+            --color-text: #333;
+        }
+        body {
+            background-color: var(--color-background);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--color-text);
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: var(--color-primary);
+            border-bottom: 3px solid var(--color-secondary);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+        }
+        
+        /* ================== БЛОКИ ИМЕНИННИКОВ ================== */
+        .birthday-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .birthday-card {
+            width: 250px;
+            background-color: white;
+            border: 2px solid var(--color-accent);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .birthday-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .birthday-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--color-secondary);
+            cursor: pointer; /* Для модального окна */
+        }
+        .birthday-card h3 {
+            color: var(--color-primary);
+            margin: 10px 0 5px;
+        }
+        
+        /* ================== ФОРМА ПОЗДРАВЛЕНИЙ ================== */
+        #wishes-section {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        #wishes-section h2 {
+            color: var(--color-accent);
+        }
+        #wish-form input, #wish-form textarea {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        #wish-form button[type="submit"] {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        /* ================== ВЫВОД ПОЗДРАВЛЕНИЙ ================== */
+        #messages-display {
+            margin-top: 20px;
+            text-align: left;
+            padding: 15px;
+            border: 1px dashed var(--color-secondary);
+            border-radius: 5px;
+            background-color: #fffae0;
+        }
+        #messages-display p {
+            margin: 8px 0;
+            padding-left: 10px;
+            border-left: 3px solid var(--color-accent);
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>🎉 Именинники Октября! 🎉</h1>
+        <a href="index.html" style="color: var(--color-primary); text-decoration: none;">← Вернуться на Главную</a>
+    </header>
+
+    <main class="birthday-card-container">
+        
+        
+
+        <div class="birthday-card">
+            <img src="images/Begenova Darııa.jpeg"  alt="Фото Begenova Darııa" title="Нажми, чтобы увидеть поздравление!">
+            <h3>Бегенова Дария </h3>
+            <p>День рождения: 03.10.2014</p>
+            <p>Возраст: <span class="age"></span></p>
+        </div>
+        
+        <div class="birthday-card">
+            <img src="images/Kojanova Raıana.jpg" alt="Фото Kojanova Raıana" title="Нажми, чтобы увидеть поздравление!">
+            <h3>Кожанова Раяна </h3>
+            <p>День рождения: 05.10.2014</p>
+            <p>Возраст: <span class="age"></span></p>
+        </div>
+
+        
+        
+    </main>
+
+    <section id="wishes-section">
+        <h2>💌 Оставь Свое Пожелание Именинникам!</h2>
+        <form id="wish-form">
+            <input type="text" id="sender-name" name="sender-name" required placeholder="Ваше имя">
+            <textarea id="wish-text" name="wish-text" rows="4" required placeholder="Напишите здесь ваше теплое поздравление!"></textarea>
+            <button type="submit">Отправить Пожелание! 🎈</button>
+        </form>
+
+        <div id="messages-display">
+            <h3>Лента Поздравлений:</h3>
+            <p><strong>Администратор</strong>: *Счастья и успехов всем октябрьским именинникам!*</p>
+        </div>
+    </section>
+
+    <script>
+        // Функция расчета возраста
+        function calcAge(birthDateString) {
+            const parts = birthDateString.split('.');
+            const birthDate = new Date(parts[2], parts[1] - 1, parts[0]);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age + ' лет';
+        }
+
+        // Применяем расчет возраста ко всем карточкам
+        document.querySelectorAll('.birthday-card').forEach(card => {
+            const birthDateElement = card.querySelector('p:nth-child(3)');
+            if (birthDateElement) {
+                const dateText = birthDateElement.textContent.replace('День рождения: ', '').trim();
+                const ageSpan = card.querySelector('.age');
+                if (ageSpan) {
+                    ageSpan.textContent = calcAge(dateText);
+                }
+            }
+        });
+        
+        // Обработка формы (имитация)
+        document.getElementById('wish-form').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            const name = document.getElementById('sender-name').value;
+            const wish = document.getElementById('wish-text').value;
+            const display = document.getElementById('messages-display');
+
+            const newMessage = document.createElement('p');
+            newMessage.innerHTML = `<strong>${name}</strong>: *"${wish}"* (🥳 Спасибо!)`;
+            
+            // Добавляем новое пожелание в начало ленты
+            const h3 = display.querySelector('h3');
+            display.insertBefore(newMessage, h3.nextSibling);
+
+            document.getElementById('wish-form').reset();
+            alert('Пожелание отправлено! Оно появилось в ленте поздравлений. 😊');
+        });
+    </script>
+
+</body>
+</html>
